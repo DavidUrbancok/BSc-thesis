@@ -1,0 +1,73 @@
+﻿using System;
+
+namespace CMS.Tests
+{
+    /// <summary>
+    /// Generic base class for test extender
+    /// </summary>
+    /// <typeparam name="TParentTest">Type of parent test. This type specifies on which test level the extender should be applied</typeparam>
+    public abstract class TestExtender<TParentTest> : TestExtender
+        where TParentTest : AutomatedTests
+    {
+    }
+
+
+    /// <summary>
+    /// Base class for test extenders
+    /// </summary>
+    public abstract class TestExtender
+    {
+        /// <summary>
+        /// Milestone action
+        /// </summary>
+        public Action Milestone
+        {
+            get;
+            set;
+        }
+
+
+        /// <summary>
+        /// Test fixture setup
+        /// </summary>
+        public virtual void FixtureSetUp()
+        {
+        }
+
+
+        /// <summary>
+        /// Test setup
+        /// </summary>
+        public virtual void SetUp()
+        {
+        }
+
+
+        /// <summary>
+        /// Test fixture tear down
+        /// </summary>
+        public virtual void FixtureTearDown()
+        {
+        }
+
+
+        /// <summary>
+        /// Test tear down
+        /// </summary>
+        public virtual void TearDown()
+        {
+        }
+        
+
+        /// <summary>
+        /// Test milestone
+        /// </summary>
+        public virtual void TestMilestone()
+        {
+            if (Milestone != null)
+            {
+                Milestone();
+            }
+        }
+    }
+}

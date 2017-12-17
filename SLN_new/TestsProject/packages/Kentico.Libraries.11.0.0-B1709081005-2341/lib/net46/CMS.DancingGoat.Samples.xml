@@ -1,0 +1,471 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CMS.DancingGoat.Samples</name>
+    </assembly>
+    <members>
+        <member name="T:CMS.DancingGoat.Samples.SampleContactInfoIdentityCollector">
+            <summary>
+            Sample implementation of <see cref="T:CMS.DataProtection.IIdentityCollector"/> for collecting <see cref="T:CMS.ContactManagement.ContactInfo"/>s by an email address.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactInfoIdentityCollector.Collect(System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.List{CMS.DataEngine.BaseInfo})">
+            <summary>
+            Collects all the <see cref="T:CMS.ContactManagement.ContactInfo"/>s and adds them to the <paramref name="identities"/> collection.
+            </summary>
+            <remarks>
+            Contacts are collected by their email address.
+            Duplicate customers are not added.
+            </remarks>
+            <param name="dataSubjectIdentifiersFilter">Key value collection containing data subject's information that identifies it.</param>
+            <param name="identities">List of already collected identities.</param>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.SampleCustomerInfoIdentityCollector">
+            <summary>
+            Sample implementation of <see cref="T:CMS.DataProtection.IIdentityCollector"/> for collecting <see cref="T:CMS.Ecommerce.CustomerInfo"/>s by an email address.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerInfoIdentityCollector.Collect(System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.List{CMS.DataEngine.BaseInfo})">
+            <summary>
+            Collects all the <see cref="T:CMS.Ecommerce.CustomerInfo"/>s and adds them to the <paramref name="identities"/> collection.
+            </summary>
+            <remarks>
+            Customers are collected by their email address.
+            Duplicate customers are not added.
+            </remarks>
+            <param name="dataSubjectIdentifiersFilter">Key value collection containing data subject's information that identifies it.</param>
+            <param name="identities">List of already collected identities.</param>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.DancingGoatSamplesModule">
+            <summary>
+            Represents module with DataProtection sample code.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.DancingGoatSamplesModule.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CMS.DancingGoat.Samples.DancingGoatSamplesModule"/> class.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.DancingGoatSamplesModule.OnInit">
+            <summary>
+            Initializes the module.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.DancingGoatSamplesModule.InitializeSamples">
+            <summary>
+            Registers sample personal data collectors immediately or attaches an event handler to register the collectors upon dedicated key insertion.
+            Disabling or toggling registration of the sample collectors is not supported.
+            </summary>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.SampleContactDataCollector">
+            <summary>
+            Sample implementation of <see cref="T:CMS.DataProtection.IPersonalDataCollector"/> interface for collecting contact's personal data.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactDataCollector.Collect(System.Collections.Generic.IEnumerable{CMS.DataEngine.BaseInfo},System.String)">
+            <summary>
+            Collects personal data based on given <paramref name="identities"/>.
+            </summary>
+            <param name="identities">Collection of identities representing a data subject.</param>
+            <param name="outputFormat">Defines an output format for the result.</param>
+            <returns><see cref="T:CMS.DataProtection.PersonalDataCollectorResult"/> containing personal data.</returns>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.SampleContactDataCollectorCore">
+            <summary>
+            Class responsible for retrieving contact's personal data. 
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactDataCollectorCore.#ctor(CMS.DancingGoat.Samples.IPersonalDataWriter)">
+            <summary>
+            Constructs a new instance of the <see cref="T:CMS.DancingGoat.Samples.SampleContactDataCollectorCore"/>.
+            </summary>
+            <param name="writer">Writer to format output data.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactDataCollectorCore.CollectData(System.Collections.Generic.IEnumerable{CMS.DataEngine.BaseInfo})">
+            <summary>
+            Collect and format all on-line marketing related personal data about given <paramref name="identities"/>.
+            Returns null if no data was found.
+            </summary>
+            <param name="identities">Identities to collect data about.</param>
+            <returns>Formatted personal data.</returns>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactDataCollectorCore.WriteContacts(System.Collections.Generic.IEnumerable{CMS.ContactManagement.ContactInfo})">
+            <summary>
+            Writes all contacts.
+            </summary>
+            <param name="contacts">Container of contacts.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactDataCollectorCore.WriteContactActivities(System.Collections.Generic.List{CMS.Activities.ActivityInfo})">
+            <summary>
+            Writes all contact activities.
+            </summary>
+            <param name="contactActivities">List of contact activities.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactDataCollectorCore.WriteNewsletters(System.Collections.Generic.List{System.String})">
+            <summary>
+            Gets and writes all newsletter subscriptions for specified <paramref name="contactEmails"/>.
+            </summary>
+            <param name="contactEmails">List of emails which are associated with contact.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactDataCollectorCore.WriteContactAccounts(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Gets and writes all contact accounts for specified <paramref name="contactIDs"/>.
+            </summary>
+            <param name="contactIDs">List of contact IDs.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactDataCollectorCore.WriteBizForms(System.Collections.Generic.List{CMS.Activities.ActivityInfo})">
+            <summary>
+            Gets and writes all biz form submissions associated with <paramref name="contactActivities"/>.
+            </summary>
+            <param name="contactActivities">List of contact activity infos.</param>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.SampleCustomerDataCollector">
+            <summary>
+            Sample implementation of <see cref="T:CMS.DataProtection.IPersonalDataCollector"/> interface for collecting customer's personal data.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollector.Collect(System.Collections.Generic.IEnumerable{CMS.DataEngine.BaseInfo},System.String)">
+            <summary>
+            Collects personal data based on given <paramref name="identities"/>.
+            </summary>
+            <param name="identities">Collection of identities representing a data subject.</param>
+            <param name="outputFormat">Defines an output format for the result.</param>
+            <returns><see cref="T:CMS.DataProtection.PersonalDataCollectorResult"/> containing personal data.</returns>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore">
+            <summary>
+            Class responsible for retrieving customer's personal data. 
+            </summary>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.FullAddressInfo">
+            <summary>
+            Class represents the full address of the customer.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.#ctor(CMS.DancingGoat.Samples.IPersonalDataWriter)">
+            <summary>
+            Constructs a new instance of the <see cref="T:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore"/>.
+            </summary>
+            <param name="writer">Writer to format output data.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.CollectData(System.Collections.Generic.IEnumerable{CMS.DataEngine.BaseInfo})">
+            <summary>
+            Collect and format all e-commerce personal data about given <paramref name="identities"/>.
+            Returns null if no data was found.
+            </summary>
+            <param name="identities">Identities to collect data about.</param>
+            <returns>Formatted personal data.</returns>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.WriteOrders(System.Int32)">
+            <summary>
+            Writes all orders for the given customer to the current writer.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.WriteOrder(CMS.Ecommerce.OrderInfo,System.Collections.Generic.Dictionary{System.Int32,CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.FullAddressInfo})">
+            <summary>
+             Writes the given order with all the addresses to the current writer.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.WriteOrderItems(System.Int32)">
+            <summary>
+             Writes the order items for given order to the current writer.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.WriteAddress(CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.FullAddressInfo,System.String,System.String)">
+            <summary>
+             Writes the given address to the current writer.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.WriteShoppingCarts(System.Int32)">
+            <summary>
+            Writes all shopping carts for given user to the current writer.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.WriteShoppingCart(CMS.Ecommerce.ShoppingCartInfo,System.Collections.Generic.Dictionary{System.Int32,CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.FullAddressInfo})">
+            <summary>
+             Writes the given shopping cart with all the order addresses to the current writer.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.WriteShoppingCartItems(System.Int32)">
+            <summary>
+             Writes the given shopping cart to the current writer.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerDataCollectorCore.WriteWishList(System.Int32)">
+            <summary>
+             Writes the given wish list for given user.
+            </summary>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter">
+            <summary>
+            Class used to transform data into human readable format.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter.#ctor">
+            <summary>
+            Initializes instance of <see cref="T:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter"/>
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter.WriteStartSection(System.String,System.String)">
+            <summary>
+            Writes start of a section using <paramref name="sectionDisplayName"/> followed by colon and increments indentation.
+            </summary>
+            <param name="sectionName">Name of the section in machine readable format. This parameter is ignored.</param>
+            <param name="sectionDisplayName">Name of the section in human readable format.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter.Indent">
+            <summary>
+            Writes appropriate indentation.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter.WriteBaseInfo(CMS.DataEngine.BaseInfo,System.Collections.Generic.List{System.Tuple{System.String,System.String}})">
+            <summary>
+            Writes data out of <paramref name="baseInfo"/>'s specified <paramref name="columns"/>.
+            </summary>
+            <remarks>
+            Ignores columns with missing human readable name, "ID" or "GUID" .
+            </remarks>
+            <param name="baseInfo"><see cref="T:CMS.DataEngine.BaseInfo"/> instance to write.</param>
+            <param name="columns">Columns to write <paramref name="baseInfo"/>'s data from.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter.WriteKeyValue(System.String,System.Object)">
+            <summary>
+            Writes in-line key name followed by column and value.
+            </summary>
+            <param name="keyName">Key name to write.</param>
+            <param name="value">Value associated with key.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter.WriteEndSection">
+            <summary>
+            Ends section with new line, decreases indentation level.
+            </summary>
+            <remarks>
+            Does not write new line if the last written character was new line.
+            </remarks>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter.GetResult">
+            <summary>
+            Gets result of previous write calls.
+            </summary>
+            <returns>String containing formatted data.</returns>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter.Dispose">
+            <summary>
+            Releases all resources used by the current instance of the <see cref="T:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter"/> class.
+            </summary>
+            <remarks>
+            This is a void action in <see cref="T:CMS.DancingGoat.Samples.HumanReadablePersonalDataWriter"/> as the class uses no disposable resources.
+            </remarks>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.IPersonalDataWriter">
+            <summary>
+            Defines interface of a writer used to format personal data.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.IPersonalDataWriter.WriteStartSection(System.String,System.String)">
+            <summary>
+            Writes start of a section.
+            </summary>
+            <param name="sectionName">Name of the section in machine readable format.</param>
+            <param name="sectionDisplayName">Name of the section in human readable format.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.IPersonalDataWriter.WriteBaseInfo(CMS.DataEngine.BaseInfo,System.Collections.Generic.List{System.Tuple{System.String,System.String}})">
+            <summary>
+            Writes data out of <paramref name="baseInfo"/>'s specified <paramref name="columns"/>.
+            </summary>
+            <remarks>
+            Column is defined by a tuple with first item being <paramref name="baseInfo"/>'s column name.
+            Second item contains column name in human readable format.
+            </remarks>
+            <param name="baseInfo"><see cref="T:CMS.DataEngine.BaseInfo"/> instance to write.</param>
+            <param name="columns"><paramref name="baseInfo"/>'s columns to write data from.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.IPersonalDataWriter.WriteEndSection">
+            <summary>
+            Writes end of a section.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.IPersonalDataWriter.GetResult">
+            <summary>
+            Gets result of previous write calls.
+            </summary>
+            <returns>String containing formatted data.</returns>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.XmlPersonalDataWriter">
+            <summary>
+            Writer used to transform data into XML format.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.XmlPersonalDataWriter.#ctor">
+            <summary>
+            Initializes instance of <see cref="T:CMS.DancingGoat.Samples.XmlPersonalDataWriter"/>
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.XmlPersonalDataWriter.WriteStartSection(System.String,System.String)">
+            <summary>
+            Writes XML start tag.
+            </summary>
+            <param name="sectionName">Name of the section in machine readable format. Represents name of the tag.</param>
+            <param name="sectionDisplayName">Name of the section in human readable format. This parameter is ignored.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.XmlPersonalDataWriter.TransformElementName(System.String)">
+            <summary>
+            Replaces underscore in object names with dot.
+            </summary>
+            <param name="originalName">Name to transform.</param>
+            <returns>Transformed name.</returns>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.XmlPersonalDataWriter.WriteBaseInfo(CMS.DataEngine.BaseInfo,System.Collections.Generic.List{System.Tuple{System.String,System.String}})">
+            <summary>
+            Writes data out of <paramref name="baseInfo"/>'s specified <paramref name="columns"/>.
+            </summary>
+            <remarks>
+            Ignores columns with missing human readable name.
+            </remarks>
+            <param name="baseInfo"><see cref="T:CMS.DataEngine.BaseInfo"/> instance to write.</param>
+            <param name="columns">Columns to write <paramref name="baseInfo"/>'s data from.</param>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.XmlPersonalDataWriter.WriteEndSection">
+            <summary>
+            Writes XML end tag.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.XmlPersonalDataWriter.GetResult">
+            <summary>
+            Gets result of previous write calls.
+            </summary>
+            <returns>XML string containing formatted data.</returns>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.XmlPersonalDataWriter.Dispose">
+            <summary>
+            Releases all resources used by the current instance of the <see cref="T:CMS.DancingGoat.Samples.XmlPersonalDataWriter"/> class.
+            </summary>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.SampleCustomerPersonalDataEraser">
+            <summary>
+            Sample implementation of <see cref="T:CMS.DataProtection.IPersonalDataEraser"/> interface for erasing customer's personal data.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerPersonalDataEraser.Erase(System.Collections.Generic.IEnumerable{CMS.DataEngine.BaseInfo},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Erases personal data based on given <paramref name="identities"/> and <paramref name="configuration"/>.
+            </summary>
+            <param name="identities">Collection of identities representing a data subject.</param>
+            <param name="configuration">Configures which personal data should be erased.</param>
+            <remarks>
+            The erasure process can be configured via the following <paramref name="configuration"/> parameters:
+            <list type="bullet">
+            <item>
+            <term>deleteCustomers</term>
+            <description>Flag indicating whether customer(s) contained in <paramref name="identities"/> are to be deleted.</description>
+            </item>
+            <item>
+            <term>deleteOrdersOlderThanYears</term>
+            <description>Number indicating how old orders are to be deleted. Omit the parameter to keep all orders.</description>
+            </item>
+            <item>
+            <term>deleteShoppingCarts</term>
+            <description>Flag indicating whether shopping carts associated with customer(s), user(s) or contact(s) are to be deleted.</description>
+            </item>
+            <item>
+            <term>deleteWishlists</term>
+            <description>Flag indicating whether wishlists associated with customer(s) are to be deleted.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerPersonalDataEraser.DeleteOrders(System.Collections.Generic.List{System.Int32},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes orders based on <paramref name="configuration"/>'s <c>deleteOrdersOlderThanYears</c> number for given <paramref name="customerIds"/>.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerPersonalDataEraser.DeleteOrdersCore(System.Collections.Generic.List{System.Int32},System.DateTime)">
+            <summary>
+            Deletes orders <paramref name="ordersOlderThan"/> for given <paramref name="customerIds"/>.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerPersonalDataEraser.DeleteShoppingCarts(System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes shopping carts for given <paramref name="customerIds"/>, <paramref name="userIds"/>
+            and <paramref name="contactIds"/> based on <paramref name="configuration"/>'s <c>deleteShoppingCarts</c> flag.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerPersonalDataEraser.DeleteShoppingCartsCore(System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Deletes shopping carts for given <paramref name="customerIds"/>, <paramref name="userIds"/> and <paramref name="contactIds"/>
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerPersonalDataEraser.DeleteWishlists(System.Collections.Generic.List{System.Int32},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes wishlists for given <paramref name="userIds"/> based on <paramref name="configuration"/>'s <c>deleteWishlists</c> flag.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleCustomerPersonalDataEraser.DeleteCustomers(System.Collections.Generic.IEnumerable{CMS.Ecommerce.CustomerInfo},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes <paramref name="customers"/> based on <paramref name="configuration"/>'s <c>deleteCustomers</c> flag.
+            </summary>
+        </member>
+        <member name="T:CMS.DancingGoat.Samples.SampleContactPersonalDataEraser">
+            <summary>
+            Sample implementation of <see cref="T:CMS.DataProtection.IPersonalDataEraser"/> interface for erasing contact's personal data.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactPersonalDataEraser.Erase(System.Collections.Generic.IEnumerable{CMS.DataEngine.BaseInfo},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Erases personal data based on given <paramref name="identities"/> and <paramref name="configuration"/>.
+            </summary>
+            <param name="identities">Collection of identities representing a data subject.</param>
+            <param name="configuration">Configures which personal data should be erased.</param>
+            <remarks>
+            The erasure process can be configured via the following <paramref name="configuration"/> parameters:
+            <list type="bullet">
+            <item>
+            <term>deleteContacts</term>
+            <description>Flag indicating whether contact(s) contained in <paramref name="identities"/> are to be deleted.</description>
+            </item>
+            <item>
+            <term>deleteContactFromAccounts</term>
+            <description>Flag indicating whether contact's association with accounts is to be deleted.</description>
+            </item>
+            <item>
+            <term>deleteSubscriptionFromNewsletters</term>
+            <description>Flag indicating whether contact's subscription to newsletters is to be deleted.</description>
+            </item>
+            <item>
+            <term>deleteActivities</term>
+            <description>Flag indicating whether activities of contact are to be deleted.</description>
+            </item>
+            <item>
+            <term>deleteSubmittedFormsActivities</term>
+            <description>Flag indicating whether form activities of contact are to be deleted.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactPersonalDataEraser.DeleteSubmittedFormsActivities(System.Collections.Generic.List{System.Int32},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes contact's submitted forms activities based on <paramref name="configuration"/>'s <c>deleteSubmittedFormsActivities</c> flag.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactPersonalDataEraser.DeleteActivities(System.Collections.Generic.List{System.Int32},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes contact's activities based on <paramref name="configuration"/>'s <c>deleteActivities</c> flag.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactPersonalDataEraser.DeleteContactFromAccounts(System.Collections.Generic.List{System.Int32},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes contact from accounts based on <paramref name="configuration"/>'s <c>deleteContactFromAccounts</c> flag.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactPersonalDataEraser.DeleteSubscriptionFromNewsletters(System.Collections.Generic.List{System.String},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes contact from newsletter's subscription based on <paramref name="configuration"/>'s <c>deleteSubscriptionFromNewsletters</c> flag.
+            </summary>
+        </member>
+        <member name="M:CMS.DancingGoat.Samples.SampleContactPersonalDataEraser.DeleteContacts(System.Collections.Generic.IEnumerable{CMS.ContactManagement.ContactInfo},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Deletes <paramref name="contacts"/> based on <paramref name="configuration"/>'s <c>deleteContacts</c> flag.
+            </summary>
+        </member>
+    </members>
+</doc>
